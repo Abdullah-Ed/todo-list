@@ -1,5 +1,5 @@
 import { TodosArrays,Todos } from "./crateTodo";
-import{UiControl} from "./UI"
+import{TodoManager} from "./UI"
 
 
 class FormHandler {
@@ -18,7 +18,7 @@ class FormHandler {
     
     TodosArrays.addToArray(newTodo);
     console.log(TodosArrays.allTodosArray);
-    UiControl.loadMainTodos();
+    TodoManager.loadMainTodos();
   }
 }
 
