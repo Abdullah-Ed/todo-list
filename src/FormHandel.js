@@ -18,7 +18,7 @@ class FormHandler {
     
     TodosArrays.addToArray(newTodo);
     console.log(TodosArrays.allTodosArray);
-    TodoManager.loadMainTodos();
+    TodoManager.renderTodos();
   }
 }
 

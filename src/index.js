@@ -5,4 +5,5 @@ import { TodoManager } from './UI';
 const addProjectBtn = document.querySelector('.add-project-btn');
 addProjectBtn.addEventListener('click', FormHandler.createProject);
 
-TodoManager.deleteTodo()
+TodoManager.initialize();
+TodoManager.renderTodos();
