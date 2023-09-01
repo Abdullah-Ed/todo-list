@@ -1,4 +1,7 @@
-import { TodosArrays } from "./crateTodo";
+import { TodosArrays } from "./createTodo";
+import { Dates } from "./createTodo";
+import format from "date-fns/format";
+import FormHandler from "./FormHandel";
 
 class TodoRenderer {
   static renderTodo(todo, index) {
@@ -6,10 +9,10 @@ class TodoRenderer {
       <div class="todo-container">
         <h1>${todo.title}</h1>
         <p>${todo.description}</p>
-        <p>${todo.dueDate}</p>
+        <p>${format(new Date(todo.dueDate),"dd/MM/yyyy")}</p>
         <p>${todo.priority}</p>
-        <img class="edit-icon" data-edit-index="${index}" src="../dist/images/edit.svg" alt="Edit icon">
-        <img class="delete-icon" data-delete-index="${index}" src="../dist/images/delete.svg" alt="Delete icon">
+        <img class="edit-icon" data-edit-index="${index}" src="./images/edit.svg" alt="Edit icon">
+        <img class="delete-icon" data-delete-index="${index}" src="./images/delete.svg" alt="Delete icon">
       </div>
     `;
   }
@@ -17,7 +20,7 @@ class TodoRenderer {
 
 class TodoManager {
   static content = document.querySelector('.content');
-  static currentIndex = null;
+  static currentIndex 
 
   static initialize() {
     this.content.addEventListener('click', (event) => {
@@ -34,7 +37,11 @@ class TodoManager {
   static renderTodos() {
     this.content.innerHTML = TodosArrays.allTodosArray.map((todo, index) => {
       return TodoRenderer.renderTodo(todo, index);
-    }).join(''); // Join the array to form a single HTML string
+    }) 
+    Dates.addToTodayArray()
+    console.log(Dates.todayTodoArray)
+    Dates.addToCurrentWeekArray();
+    console.log(Dates.currentWeekTodoArray)
   }
 
   static deleteTodo(index) {
@@ -75,10 +82,7 @@ class TodoManager {
     const editForm = document.getElementById('edit-form');
     const saveButton = document.getElementById('save-button');
     saveButton.addEventListener('click', () => {
-      if (!editForm.checkValidity()) {
-        ed.reportValidity();
-        return;
-      }
+      if (!FormHandler.validateForm(editForm)) return;
       // Handle form submission here and update the TodosArrays
       const updatedTodo = {
         title: document.querySelector('.title').value,
@@ -91,9 +95,5 @@ class TodoManager {
     });
   }
 }
-
-
-
-
 
 export { TodoManager };
