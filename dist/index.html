@@ -8,7 +8,20 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <form>
+  <ul>
+    <li class="home-tab">Home</li>
+    <li class="today-tab">Today</li>
+    <li class="week-tab">This Week</li>
+    <form class="project">
+      <label for="new-project">New project?</label>
+      <input type="text" id="new-project" name="new-project" required>
+      <button type="submit" class="project-btn">Submit</button>
+    </form>
+    <div class="project-container">
+
+    </div>
+  </ul>
+  <form class="task-from">
     <div class="form-container">
       <label for="title">Title</label>
       <input type="text" name="title" id="title" required>
@@ -26,7 +39,7 @@
         <option value="low">Low</option>
       </select>
     </div>
-    <button class="add-project-btn" type="submit">Add a Project</button>
+    <button class="add-task-btn" type="submit">Add a Task</button>
   </form>
 
   <div class="content">
