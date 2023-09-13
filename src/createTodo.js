@@ -10,6 +10,7 @@ class TodosArrays {
 
 class Todos {
   constructor(title, description, dueDate, priority) {
+    this.id = Date.now()+ Math.random(); // Using a timestamp as a simple unique identifier
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
@@ -31,13 +32,8 @@ class Dates extends TodosArrays {
   }
 
   static addToTodayArray() {
-    this.todayTodoArray = [];
     const currentDate = this.getCurrentDate();
-    this.allTodosArray.forEach((todo) => {
-      if (todo.dueDate === currentDate) {
-        this.todayTodoArray.push(todo);
-      }
-    });
+    TodosArrays.todayTodoArray = TodosArrays.allTodosArray.filter((todo) => todo.dueDate === currentDate);
   }
 
   static getStartOfWeek() {
@@ -50,14 +46,11 @@ class Dates extends TodosArrays {
   }
 
   static addToCurrentWeekArray() {
-    this.currentWeekTodoArray = [];
     const startOfWeek = this.getStartOfWeek();
     const endOfWeek = this.getEndOfWeek();
 
-    this.allTodosArray.forEach((todo) => {
-      if (todo.dueDate >= startOfWeek && todo.dueDate <= endOfWeek) {
-        this.currentWeekTodoArray.push(todo);
-      }
+    TodosArrays.currentWeekTodoArray = TodosArrays.allTodosArray.filter((todo) => {
+      return todo.dueDate >= startOfWeek && todo.dueDate <= endOfWeek;
     });
   }
 
@@ -68,6 +61,13 @@ class Dates extends TodosArrays {
     endOfWeek.setDate(date.getDate() + (6 - dayOfWeek));
 
     return this.formatDate(endOfWeek);
+  }
+
+  static updateDatesArray(){
+    Dates.addToTodayArray();
+    console.log(Dates.todayTodoArray);
+    Dates.addToCurrentWeekArray();
+    console.log(Dates.currentWeekTodoArray);
   }
 }
 
