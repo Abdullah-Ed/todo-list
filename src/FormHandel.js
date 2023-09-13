@@ -1,5 +1,6 @@
-import { TodosArrays, Todos } from "./createTodo";
-import { TodoManager } from "./UI";
+import { TodosArrays, Todos, Dates } from "./createTodo";
+import { TodoManager, TodoRenderer,TabHandler } from "./UI";
+
 
 class FormHandler {
   static projectArray = [];
@@ -14,7 +15,9 @@ class FormHandler {
 
     TodosArrays.addToArray(newTodo);
     console.log(TodosArrays.allTodosArray);
-    TodoManager.renderTodos();
+    Dates.updateDatesArray()
+    TabHandler.updateCurrentArray()
+    TodoManager.renderTodosOnPage(TodoRenderer.currentArray);
   }
 
   static validateForm(form) {
@@ -44,19 +47,22 @@ class FormHandler {
     }
   
     this.projectArray.push(input);
-    this.addLi(input);
+    this.addLi();
     
     form.reset();
   }
 
-  static addLi(projectName) {
+  static addLi() {
     const projectDiv = document.querySelector('.project-container');
-    const li = document.createElement('li');
-    li.textContent = projectName;
-    li.classList.add('project')
-    projectDiv.appendChild(li);
+    projectDiv.innerHTML = '';
+    this.projectArray.forEach((project,index) =>{
+      projectDiv.innerHTML+=`
+      <li class="project" data-project-index="${index}">${project}</li>
+      `
+    })
   }
 }
 
 export default FormHandler;
+
 
