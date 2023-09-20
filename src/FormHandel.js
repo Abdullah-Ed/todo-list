@@ -86,6 +86,7 @@ class ProjectHandler{
     projectSelect.innerHTML = '';
     this.projectArray.forEach((project) =>{
       projectSelect.innerHTML += `
+      <option value="No-Project">No Project</option>
       <option value="${project}">${project}</option>`
     });
     TabHandler.liClickEvent();
