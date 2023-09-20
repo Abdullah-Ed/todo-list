@@ -1,10 +1,8 @@
-import { TodosArrays, Todos, Dates } from "./createTodo";
+import { TodosArrays, Todos, ArraysManager } from "./createTodo";
 import { TodoManager, TodoRenderer,TabHandler } from "./UI";
 
 
 class FormHandler {
-  static projectArray = [];
-
   static createTodo = (event) => {
     event.preventDefault();
     const form = event.target.closest("form");
@@ -15,7 +13,7 @@ class FormHandler {
 
     TodosArrays.addToArray(newTodo);
     console.log(TodosArrays.allTodosArray);
-    Dates.updateDatesArray()
+    ArraysManager.updateDatesArray()
     TabHandler.updateCurrentArray()
     TodoManager.renderTodosOnPage(TodoRenderer.currentArray);
   }
@@ -29,15 +27,21 @@ class FormHandler {
   }
 
   static createTodoFromForm(form) {
-    const { title, description, dueDate, priority } = form.elements;
-    return new Todos(title.value, description.value, dueDate.value, priority.value);
+    const { title, description, dueDate, priority,project } = form.elements;
+    return new Todos(title.value, description.value, dueDate.value, priority.value,project.value);
   }
+
+ 
+}
+
+class ProjectHandler{
+  static projectArray = ['General'];
 
   static createProject = (event) => {
     event.preventDefault();
     const form = event.target.closest("form");
 
-    if (!this.validateForm(form)) return;
+    if (!FormHandler.validateForm(form)) return;
 
     const input = document.querySelector('#new-project').value;
     
@@ -47,22 +51,58 @@ class FormHandler {
     }
   
     this.projectArray.push(input);
-    this.addLi();
+    this.renderProjects();
     
     form.reset();
   }
 
-  static addLi() {
-    const projectDiv = document.querySelector('.project-container');
+  static renderProjects() {
+    const projectDiv = document.querySelector('.projects-container');
     projectDiv.innerHTML = '';
     this.projectArray.forEach((project,index) =>{
       projectDiv.innerHTML+=`
-      <li class="project" data-project-index="${index}">${project}</li>
-      `
-    })
+      <div>
+      <li class="project" >${project}</li>
+      <img class="delete-project-icon" data-project-index="${index}" src="./images/delete.svg" alt="Delete icon">
+      </div>`
+    });
+  
+    this.AddProjectToForm();
+  
+    // Automatically select the latest added project
+    const projects = TabHandler.getAllLi();
+    if(!document.querySelector('.currentProject') && projects.length > 0){
+      projects[projects.length - 1].classList.add('currentProject');
+      TabHandler.loadUserProjectTodos()  
+    }
+    if(this.projectArray == 0){
+      TabHandler.loadWeeksTodos()
+    }
+  }
+  
+
+  static AddProjectToForm(){
+    const projectSelect = document.getElementById('project');
+    projectSelect.innerHTML = '';
+    this.projectArray.forEach((project) =>{
+      projectSelect.innerHTML += `
+      <option value="${project}">${project}</option>`
+    });
+    TabHandler.liClickEvent();
+    TabHandler.AddEventToProject();
+  } 
+
+  static deleteProject(){
+    const projectDiv = document.querySelector('.projects-container');
+    projectDiv.addEventListener('click', (event) => {
+     if (event.target.classList.contains('delete-project-icon')) {
+      const imgIndex = event.target.getAttribute('data-project-index');
+      this.projectArray.splice(imgIndex,1);
+      this.renderProjects();
+      console.log(this.projectArray);
+    }
+   })
   }
 }
 
-export default FormHandler;
-
-
+export  {FormHandler,ProjectHandler};
