@@ -9,11 +9,11 @@
 </head>
 <body>
   <ul>
-    <li class="home-tab">Home</li>
+    <li class="home-tab currentProject">Home</li>
     <li class="today-tab">Today</li>
     <li class="week-tab">This Week</li>
-    <div class="project-container"></div>
-    <form class="project">
+    <div class="projects-container"></div>
+    <form class="project-form">
       <label for="new-project">New project?</label>
       <input type="text" id="new-project" name="new-project" required>
       <button type="submit" class="project-btn">Submit</button>
@@ -35,6 +35,10 @@
         <option value="high">High</option>
         <option value="medium">Medium</option>
         <option value="low">Low</option>
+      </select>
+      
+      <label for="project">Project</label>
+      <select name="project" id="project">
       </select>
     </div>
     <button class="add-task-btn" type="submit">Add a Task</button>
