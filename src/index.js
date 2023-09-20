@@ -1,4 +1,4 @@
-import FormHandler from './FormHandel'
+import {FormHandler,ProjectHandler} from './FormHandel';
 import { TodoManager,TodoRenderer,TabHandler } from './UI';
 
 TabHandler.loadHomeTodos();
@@ -9,7 +9,9 @@ TodoManager.initialize();
 TodoManager.renderTodosOnPage(TodoRenderer.currentArray);
 
 const createProjectBtn =document.querySelector('.project-btn');
-createProjectBtn.addEventListener('click',FormHandler.createProject)
+createProjectBtn.addEventListener('click',ProjectHandler.createProject);
+
+ProjectHandler.renderProjects();
 
 const homeTab = document.querySelector('.home-tab');
 homeTab.addEventListener('click', TabHandler.loadHomeTodos);
@@ -19,3 +21,8 @@ todayTab.addEventListener('click', TabHandler.loadTodayTodos);
 
 const weekTab = document.querySelector('.week-tab');
 weekTab.addEventListener('click', TabHandler.loadWeeksTodos);
+
+TabHandler.AddEventToProject();
+
+ProjectHandler.deleteProject();
+TabHandler.liClickEvent();
