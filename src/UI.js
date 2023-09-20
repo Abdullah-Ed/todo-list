@@ -1,12 +1,12 @@
 import { TodosArrays } from "./createTodo";
-import { Dates } from "./createTodo";
+import { ArraysManager } from "./createTodo";
 import format from "date-fns/format";
-import FormHandler from "./FormHandel";
+import {FormHandler} from "./FormHandel";
 
 class TodoRenderer {
-  static currentArray = TodosArrays.allTodosArray
+  static currentArray = TodosArrays.allTodosArray;
 
-  static renderTodo(todo, index) {
+  static renderTodo(todo) {
     return `
       <div class="todo-container">
         <h1>${todo.title}</h1>
@@ -50,8 +50,9 @@ class TodoManager {
             console.log(currentIndex)
             TodosArrays.allTodosArray.splice(indexInAllTodos, 1);
 
-            Dates.updateDatesArray()
+            ArraysManager.updateDatesArray()
             TabHandler.updateCurrentArray()
+            
             this.renderTodosOnPage(TodoRenderer.currentArray)
         }
     })
@@ -98,9 +99,10 @@ static editTodo(id) {
       description: document.querySelector('.description').value,
       dueDate: document.querySelector('.dueDate').value,
       priority: document.querySelector('.priority').value,
+      project: todo.project,
     };
     TodosArrays.allTodosArray[indexInAllTodos] = updatedTodo;
-    Dates.updateDatesArray()
+    ArraysManager.updateDatesArray()
     TabHandler.updateCurrentArray()
     this.renderTodosOnPage(TodoRenderer.currentArray);
   });
@@ -132,9 +134,24 @@ class TabHandler {
     TodoManager.renderTodosOnPage(TodoRenderer.currentArray);
   }
 
+  static loadUserProjectTodos(){
+    TabHandler.emptyContent();
+    ArraysManager.updateProjectArray()
+    TodoRenderer.currentArray = TodosArrays.userProjectsArray;
+    TodoManager.renderTodosOnPage(TodoRenderer.currentArray);
+  }
+
+  static AddEventToProject(){
+   const projects = document.querySelectorAll('.project')
+   projects.forEach((project) =>{
+    project.addEventListener('click',this.loadUserProjectTodos.bind(this))
+   });
+    
+  }
+
   static updateCurrentArray(){
     const currentTab = document.querySelector('.currentProject'); 
-    if(!currentTab)return;
+    if(!currentTab) return;
     switch (currentTab.textContent) { 
         case 'Home':
             TodoRenderer.currentArray = TodosArrays.allTodosArray;
@@ -145,19 +162,29 @@ class TabHandler {
         case 'This Week':
             TodoRenderer.currentArray = TodosArrays.currentWeekTodoArray;
             break;
+        default:
+            TodoRenderer.currentArray = TodosArrays.userProjectsArray; 
+            break;
     }
   }
+
+  static getAllLi() {
+    return document.querySelectorAll('li');
+  }
+
+  static addClass(event) {
+    const projects = this.getAllLi(); 
+    projects.forEach(project => project.classList.remove('currentProject'));
+    event.target.classList.add('currentProject');
+  }
+
+  static liClickEvent() {
+    const projects = this.getAllLi(); 
+    projects.forEach(project => project.addEventListener('click', this.addClass.bind(this))); 
+  }
+
 }
 
-
-const projects = document.querySelectorAll('li');
-
-function handleClick(event) {
-  projects.forEach(project => project.classList.remove('currentProject'));
-  event.target.classList.add('currentProject');
-}
-
-projects.forEach(project => project.addEventListener('click', handleClick));
 
 
 export { TodoManager, TodoRenderer, TabHandler };
