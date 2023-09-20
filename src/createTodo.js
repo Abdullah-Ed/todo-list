@@ -1,10 +1,12 @@
 import {isThisWeek,isToday,parseISO } from "date-fns";
 
+
 class TodosArrays {
   static allTodosArray = [];
   static todayTodoArray = [];
   static currentWeekTodoArray = [];
 
+  static userProjectsArray = [];
   static addToArray(newObject) {
     this.allTodosArray.unshift(newObject);
   }
@@ -17,11 +19,11 @@ class Todos {
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.project = project
+    this.project = project;
   }
 }
 
-class Dates extends TodosArrays {
+class ArraysManager extends TodosArrays {
   static addToTodayArray() {
     TodosArrays.todayTodoArray = TodosArrays.allTodosArray.filter((todo) => isToday(parseISO(todo.dueDate)) ==true);
   }
@@ -33,12 +35,25 @@ class Dates extends TodosArrays {
   }
 
   static updateDatesArray(){
-    Dates.addToTodayArray();
-    console.log(Dates.todayTodoArray);
-    Dates.addToCurrentWeekArray();
-    console.log(Dates.currentWeekTodoArray);
+    ArraysManager.addToTodayArray();
+    console.log(ArraysManager.todayTodoArray);
+    ArraysManager.addToCurrentWeekArray();
+    console.log(ArraysManager.currentWeekTodoArray);
+    ArraysManager.updateProjectArray()
+    console.log(ArraysManager.userProjectsArray)
+  }
+
+  static getLilInnerText(){
+    if(document.querySelector('.currentProject')){const project = document.querySelector('.currentProject').innerText
+    console.log(project)
+    return project}
+  }
+
+  static updateProjectArray(){
+    TodosArrays.userProjectsArray = TodosArrays.allTodosArray.filter(
+      (todo) => todo.project == this.getLilInnerText())
   }
 }
 
-export { TodosArrays, Todos, Dates };
+export { TodosArrays, Todos, ArraysManager };
 
