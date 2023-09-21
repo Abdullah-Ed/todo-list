@@ -13,13 +13,14 @@ class TodosArrays {
 }
 
 class Todos {
-  constructor(title, description, dueDate, priority,project) {
+  constructor(title, description, dueDate, priority,project,status) {
     this.id = Date.now()+ Math.random(); // Using a timestamp as a simple unique identifier
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.project = project;
+    this.status = false; 
   }
 }
 
