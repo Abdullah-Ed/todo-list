@@ -1,5 +1,5 @@
 import { TodosArrays, Todos, ArraysManager } from "./createTodo";
-import { TodoManager, TodoRenderer,TabHandler } from "./UI";
+import { TodoManager, TodoRenderer,TabHandler, FormControl } from "./UI";
 
 
 class FormHandler {
@@ -16,6 +16,7 @@ class FormHandler {
     ArraysManager.updateDatesArray()
     TabHandler.updateCurrentArray()
     TodoManager.renderTodosOnPage(TodoRenderer.currentArray);
+    FormControl.hideForm(event)
   }
 
   static validateForm(form) {
@@ -27,8 +28,15 @@ class FormHandler {
   }
 
   static createTodoFromForm(form) {
-    const { title, description, dueDate, priority,project } = form.elements;
-    return new Todos(title.value, description.value, dueDate.value, priority.value,project.value);
+    const { title, description, dueDate, priority, project } = form.elements;
+    return new Todos(
+      title.value,
+      description.value,
+      dueDate.value,
+      priority.value,
+      project.value,
+      false 
+    );
   }
 
  
@@ -53,7 +61,9 @@ class ProjectHandler{
     this.projectArray.push(input);
     this.renderProjects();
     
+    FormControl.hideProjectForm(event)
     form.reset();
+
   }
 
   static renderProjects() {
