@@ -145,26 +145,28 @@ static editTodo(id) {
 class TabHandler {
   static emptyContent() {
     const content = document.querySelector('.content');
-    content.innerHTML = '';
+    content.innerHTML = '';    
   }
 
   static loadHomeTodos() {
     TabHandler.emptyContent();
     TodoRenderer.currentArray = TodosArrays.allTodosArray;
     TodoManager.renderTodosOnPage(TodoRenderer.currentArray);
-    StyleControl.changePriorityStyle();
+    TabHandler.changTabHeader();
   }
 
   static loadTodayTodos() {
     TabHandler.emptyContent();
     TodoRenderer.currentArray = TodosArrays.todayTodoArray;
     TodoManager.renderTodosOnPage(TodoRenderer.currentArray);
+    TabHandler.changTabHeader();
   }
 
   static loadWeeksTodos() {
     TabHandler.emptyContent();
     TodoRenderer.currentArray = TodosArrays.currentWeekTodoArray;
     TodoManager.renderTodosOnPage(TodoRenderer.currentArray);
+    TabHandler.changTabHeader();
   }
 
   static loadUserProjectTodos(){
@@ -172,6 +174,7 @@ class TabHandler {
     ArraysManager.updateProjectArray()
     TodoRenderer.currentArray = TodosArrays.userProjectsArray;
     TodoManager.renderTodosOnPage(TodoRenderer.currentArray);
+    TabHandler.changTabHeader();
   }
 
   static AddEventToProject(){
@@ -214,6 +217,13 @@ class TabHandler {
   static liClickEvent() {
     const projects = this.getAllLi(); 
     projects.forEach(project => project.addEventListener('click', this.addClass.bind(this))); 
+  }
+
+  static changTabHeader(){
+    const currentTab = document.querySelector('.currentProject');
+    const tabHeader = document.querySelector('.current-tab-header');
+
+    tabHeader.textContent = currentTab.textContent;
   }
 
 }
