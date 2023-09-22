@@ -13,7 +13,7 @@ static renderTodo(todo) {
       <h1 class="title" id="${titleId}" data-status-id="${todo.id}">${todo.title}</h1>
       <p class="details">${todo.description}</p>
       <p>${format(new Date(todo.dueDate),"dd/MM/yyyy")}</p>
-      <p>${todo.priority}</p>
+      <p class="priority-color">${todo.priority}</p>
       <img class="edit-icon" data-edit-id="${todo.id}" src="./images/edit.svg" alt="Edit icon">
       <img class="delete-icon" data-delete-id="${todo.id}" src="./images/delete.svg" alt="Delete icon">
     </div>
@@ -42,8 +42,9 @@ class TodoManager {
 
   static renderTodosOnPage(currentArray) {
     this.content.innerHTML = currentArray.map((todo, index) => {
-      return TodoRenderer.renderTodo(todo, index);
+      return TodoRenderer.renderTodo(todo, index)
     }) 
+    StyleControl.changePriorityStyle();
   }
 
   static changeStatus(id){
@@ -151,6 +152,7 @@ class TabHandler {
     TabHandler.emptyContent();
     TodoRenderer.currentArray = TodosArrays.allTodosArray;
     TodoManager.renderTodosOnPage(TodoRenderer.currentArray);
+    StyleControl.changePriorityStyle();
   }
 
   static loadTodayTodos() {
@@ -216,7 +218,7 @@ class TabHandler {
 
 }
 
-class FormControl{
+class StyleControl{
   static projectFormContainer = document.querySelector('.project-form-container');
   static formContainer = document.querySelector('#form-container');
 
@@ -240,7 +242,20 @@ class FormControl{
     this.formContainer.style.display="none";
   }
 
-  static styleControl(){
+  static changePriorityStyle(){
+    const priories = document.querySelectorAll('.priority-color');
+    priories.forEach((priority) =>{
+      if(priority.textContent == 'high'){
+        priority.style.color="red"
+      }else if (priority.textContent == 'medium'){
+        priority.style.color="yellow"
+      }else if(priority.textContent == 'low'){
+        priority.style.color="green"
+      }
+    })
+  }
+
+  static changeDisplayStyle(){
     const showProjectBtn = document.querySelector('.show-project-form');
     const hideProjectBtn = document.querySelector('.cancel-project-form');
     const showFromBtn = document.querySelector('.show-form');
@@ -254,4 +269,4 @@ class FormControl{
 } 
 
 
-export { TodoManager, TodoRenderer, TabHandler,FormControl };
+export { TodoManager, TodoRenderer, TabHandler,StyleControl };
