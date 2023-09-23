@@ -1,5 +1,10 @@
 import {FormHandler,ProjectHandler} from './FormHandel';
-import { TodoManager,TodoRenderer,TabHandler, FormControl } from './UI';
+import { TodoManager,TodoRenderer,TabHandler, StyleControl } from './UI';
+import { ArraysManager,Storage } from './createTodo';
+
+Storage.getStoredProjects();
+Storage.getStoredTodo();
+ArraysManager.updateArrays();
 
 TabHandler.loadHomeTodos();
 const addProjectBtn = document.querySelector('.add-task-btn');
@@ -26,4 +31,4 @@ TabHandler.AddEventToProject();
 
 ProjectHandler.deleteProject();
 TabHandler.liClickEvent();
-FormControl.styleControl()
+StyleControl.changeDisplayStyle()
