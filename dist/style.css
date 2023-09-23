@@ -2,19 +2,19 @@ textarea {
   resize: none;
 }
 
-.project-form-container{
+.project-form-container {
   display: none;
 }
 
-#form-container{
- display: none;
+#form-container {
+  display: none;
 }
 
-.details{
+.details {
   display: none;
 }
 
 #completed {
   color: green;
-  text-decoration: line-through; 
+  text-decoration: line-through;
 }
