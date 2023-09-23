@@ -1,5 +1,5 @@
 import {isThisWeek,isToday,parseISO } from "date-fns";
-
+import { ProjectHandler } from "./FormHandel";
 
 class TodosArrays {
   static allTodosArray = [];
@@ -9,6 +9,7 @@ class TodosArrays {
   static userProjectsArray = [];
   static addToArray(newObject) {
     this.allTodosArray.unshift(newObject);
+    Storage.storeTodos()
   }
 }
 
@@ -35,13 +36,13 @@ class ArraysManager extends TodosArrays {
     });
   }
 
-  static updateDatesArray(){
+  static updateArrays(){
     ArraysManager.addToTodayArray();
     console.log(ArraysManager.todayTodoArray);
     ArraysManager.addToCurrentWeekArray();
     console.log(ArraysManager.currentWeekTodoArray);
     ArraysManager.updateProjectArray()
-    console.log(ArraysManager.userProjectsArray)
+    Storage.storeTodos()
   }
 
   static getLilInnerText(){
@@ -52,9 +53,27 @@ class ArraysManager extends TodosArrays {
 
   static updateProjectArray(){
     TodosArrays.userProjectsArray = TodosArrays.allTodosArray.filter(
-      (todo) => todo.project == this.getLilInnerText())
+      (todo) => todo.project == this.getLilInnerText());
   }
 }
 
-export { TodosArrays, Todos, ArraysManager };
+class Storage{
+  static storeTodos(){
+    localStorage.setItem('todoArray', JSON.stringify(TodosArrays.allTodosArray));
+  } 
+
+  static getStoredTodo(){
+    TodosArrays.allTodosArray = JSON.parse(localStorage.getItem('todoArray')) || TodosArrays.allTodosArray;
+  }
+
+  static storeProjects(){
+    localStorage.setItem('projectsArray', JSON.stringify(ProjectHandler.projectArray));
+  }
+
+  static getStoredProjects(){
+    ProjectHandler.projectArray = JSON.parse(localStorage.getItem('projectsArray')) || ProjectHandler.projectArray;
+  }
+}
+
+export { TodosArrays, Todos, ArraysManager,Storage };
 
