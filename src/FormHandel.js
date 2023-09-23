@@ -1,5 +1,5 @@
-import { TodosArrays, Todos, ArraysManager } from "./createTodo";
-import { TodoManager, TodoRenderer,TabHandler, FormControl } from "./UI";
+import { TodosArrays, Todos, ArraysManager,Storage } from "./createTodo";
+import { TodoManager, TodoRenderer,TabHandler, StyleControl } from "./UI";
 
 
 class FormHandler {
@@ -13,10 +13,11 @@ class FormHandler {
 
     TodosArrays.addToArray(newTodo);
     console.log(TodosArrays.allTodosArray);
-    ArraysManager.updateDatesArray()
+    ArraysManager.updateArrays()
+    StyleControl.changePriorityStyle()
     TabHandler.updateCurrentArray()
     TodoManager.renderTodosOnPage(TodoRenderer.currentArray);
-    FormControl.hideForm(event)
+    StyleControl.hideForm(event)
   }
 
   static validateForm(form) {
@@ -61,7 +62,7 @@ class ProjectHandler{
     this.projectArray.push(input);
     this.renderProjects();
     
-    FormControl.hideProjectForm(event)
+    StyleControl.hideProjectForm(event)
     form.reset();
 
   }
@@ -101,6 +102,7 @@ class ProjectHandler{
     });
     TabHandler.liClickEvent();
     TabHandler.AddEventToProject();
+    Storage.storeProjects();
   } 
 
   static deleteProject(){
@@ -113,6 +115,7 @@ class ProjectHandler{
       console.log(this.projectArray);
     }
    })
+   Storage.storeProjects();
   }
 }
 
