@@ -1,11 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,400;1,500&display=swap");
+
 :root {
-  --header-bg-color: #cadcf3;
+  --header-bg-color: #6e819b;
+  --aside-bg-color: #ddd;
+  --project-bg-color: #b9b9b9;
+  --aside-width: 165px;
+  --input-bg-color: white;
 }
 
 body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
 .header-section {
@@ -14,6 +21,7 @@ body {
 
   display: flex;
   align-items: center;
+  height: 100px;
   gap: 10px;
 }
 
@@ -23,6 +31,163 @@ body {
 
 .header-section > img {
   width: 40px;
+  height: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: var(--aside-width) 1fr;
+  height: calc(100vh - 100px);
+}
+
+.aside-section {
+  background-color: var(--aside-bg-color);
+  display: flex;
+  justify-content: start;
+}
+
+.currentProject ~ .delete-project-icon,
+li:hover,
+li:hover ~ .delete-project-icon,
+.currentProject {
+  background-color: var(--project-bg-color);
+}
+
+.currentProject > img {
+  visibility: visible;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  margin-top: 0.7em;
+  padding: 0;
+}
+
+img {
+  width: 20px;
+}
+
+li {
+  font-size: 1.25rem;
+  width: var(--aside-width);
+  margin-bottom: 0.4em;
+}
+
+li:before {
+  content: "";
+  height: 1.6rem;
+  width: 1.5rem;
+  background-image: url(images/home.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin-right: 0.2rem;
+  vertical-align: bottom;
+}
+
+.today-tab:before {
+  background-image: url(images/today.svg);
+}
+
+.week-tab:before {
+  background-image: url(images/thisWeek.svg);
+}
+
+.project:before {
+  background-image: url(images/project.svg);
+  height: 1.4rem;
+}
+
+button {
+  border: none;
+  color: white;
+  transition: 0.3s;
+
+  font-size: 1.2rem;
+  padding: 0.3em;
+}
+
+button:active {
+  transform: scale(0.7);
+}
+
+.positive {
+  background-color: #25c066;
+}
+
+.positive:hover {
+  background-color: #129c4b;
+}
+
+.negative {
+  background-color: #b61c1c;
+}
+
+.negative:hover {
+  background-color: #8a2020;
+}
+
+.btn-div {
+  width: var(--aside-width);
+  display: flex;
+  justify-content: center;
+}
+
+.btns-div {
+  width: var(--aside-width);
+  margin-top: 0.5em;
+  display: flex;
+  justify-content: space-around;
+}
+
+.show-project-form {
+}
+
+.delete-project-icon {
+  visibility: hidden;
+}
+
+.project:hover > .delete-project-icon {
+  visibility: visible;
+}
+
+.project {
+  position: relative;
+}
+
+.project:first-of-type {
+  margin-top: 1em;
+}
+
+.delete-project-icon {
+  position: absolute;
+  right: 2px;
+}
+
+.delete-project-icon {
+  width: 20px;
+  height: 1.62rem;
+}
+
+input {
+  width: calc(153px - 0.2em);
+  height: 30px;
+  margin-right: 40px;
+  border: none;
+
+  background-color: var(--input-bg-color);
+  font-size: 1.1rem;
+  border: none;
+
+  font-size: 1.3rem;
+  padding-left: 0.2em;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+  border: none;
 }
 
 textarea {
