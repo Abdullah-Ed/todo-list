@@ -68,10 +68,7 @@ class ProjectHandler {
     projectDiv.innerHTML = "";
     this.projectArray.forEach((project, index) => {
       projectDiv.innerHTML += `
-      <div>
-      <li class="project" >${project}</li>
-      <img class="delete-project-icon" data-project-index="${index}" src="./images/delete.svg" alt="Delete icon">
-      </div>`;
+      <li class="project" >${project} <img class="delete-project-icon" data-project-index="${index}" src="./images/delete.svg" alt="Delete icon"></li>      `;
     });
 
     this.AddProjectToForm();

@@ -129,8 +129,8 @@ class TodoManager {
             todo.priority === "low" ? "selected" : ""
           }>Low</option>
         </select>
-        <button id="save-button">Save</button>
-        <button class="cancel-edit-form">Cancel</button>
+        <button id="save-button positive">Save</button>
+        <button class="cancel-edit-form negative">Cancel</button>
       </form>
     </div>
   `;
@@ -249,15 +249,18 @@ class StyleControl {
     ".project-form-container"
   );
   static formContainer = document.querySelector("#form-container");
+  static addProjectBtn = document.querySelector(".show-project-form");
 
   static showProjectForm(event) {
     event.preventDefault();
     this.projectFormContainer.style.display = "block";
+    this.addProjectBtn.style.display = "none";
   }
 
   static hideProjectForm(event) {
     event.preventDefault();
     this.projectFormContainer.style.display = "none";
+    this.addProjectBtn.style.display = "block";
   }
 
   static showForm(event) {
