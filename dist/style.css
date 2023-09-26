@@ -128,13 +128,20 @@ button:active {
   background-color: #8a2020;
 }
 
-.btn-div {
+.project-flex {
+  width: var(--aside-width);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.project-btn-div {
   width: var(--aside-width);
   display: flex;
   justify-content: center;
 }
 
-.btns-div {
+.project-btns-div {
   width: var(--aside-width);
   margin-top: 0.5em;
   display: flex;
@@ -173,7 +180,6 @@ button:active {
 input {
   width: calc(153px - 0.2em);
   height: 30px;
-  margin-right: 40px;
   border: none;
 
   background-color: var(--input-bg-color);
