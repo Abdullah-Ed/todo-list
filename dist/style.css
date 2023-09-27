@@ -5,7 +5,7 @@
   --aside-bg-color: #ddd;
   --project-bg-color: #b9b9b9;
   --aside-width: 165px;
-  --input-bg-color: white;
+  --input-bg-color: #fcf5f5;
 }
 
 body {
@@ -143,7 +143,6 @@ button:active {
 
 .project-btns-div {
   width: var(--aside-width);
-  margin-top: 0.5em;
   display: flex;
   justify-content: space-around;
 }
@@ -177,27 +176,108 @@ button:active {
   height: 1.62rem;
 }
 
-input {
-  width: calc(153px - 0.2em);
+.form-container {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0000005d;
+}
+
+.absolute-position {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 400px;
+  margin-bottom: 300px;
+
+  background-color: white;
+}
+
+.edit {
+  height: 350px;
+}
+
+input,
+textarea {
+  width: 265px;
   height: 30px;
-  border: none;
-
-  background-color: var(--input-bg-color);
-  font-size: 1.1rem;
-  border: none;
-
-  font-size: 1.3rem;
   padding-left: 0.2em;
+  margin-bottom: 0.5em;
+  font-size: 1.3rem;
+  resize: none;
+  border: #e5e7eb solid 2px;
+}
+
+input:focus:invalid {
+  border: red solid 1px;
+}
+
+input:focus:valid {
+  border: blue solid 1px;
+}
+
+textarea {
+  height: 70px;
+}
+
+label {
+  font-size: 1rem;
+  align-self: flex-start;
+  margin-left: 13px;
+}
+
+.absolute-position > label:nth-child(5),
+.absolute-position > label:nth-child(7),
+.absolute-position > label:nth-child(9) {
+  margin-left: 60px;
+}
+
+#dueDate {
+  width: 180px;
+  font-size: 1rem;
+}
+
+select {
+  width: 180px;
+  font-size: 1.3rem;
+  background-color: white;
+  border: #e5e7eb solid 2px;
+  margin-bottom: 0.5em;
+  text-align: center;
+}
+
+#priority option:first-child {
+  background-color: red;
+
+  color: white;
+}
+
+#priority option:nth-child(2) {
+  background-color: yellow;
+}
+
+#priority option:nth-child(3) {
+  background-color: green;
 }
 
 textarea:focus,
 input:focus {
   outline: none;
-  border: none;
 }
 
-textarea {
-  resize: none;
+#new-project {
+  background-color: white;
+  width: calc(153px - 0.2em);
+  height: 30px;
+  padding-left: 0.2em;
+  margin-bottom: 0.5em;
+  font-size: 1.3rem;
 }
 
 .project-form-container {

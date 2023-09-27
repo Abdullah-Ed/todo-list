@@ -102,6 +102,7 @@ class TodoManager {
     this.content.innerHTML += `
     <div class="form-container edited">
       <form id="edit-form">
+      <div class="absolute-position edit">
         <label for="title">Title</label>
         <input type="text" class='title-input' name="title" id="title" value="${
           todo.title
@@ -129,8 +130,11 @@ class TodoManager {
             todo.priority === "low" ? "selected" : ""
           }>Low</option>
         </select>
-        <button id="save-button positive">Save</button>
-        <button class="cancel-edit-form negative">Cancel</button>
+        <div>
+          <button id="save-button" class="positive">Save</button>
+          <button class="cancel-edit-form negative">Cancel</button>
+        </div>
+        </div> 
       </form>
     </div>
   `;
@@ -265,7 +269,7 @@ class StyleControl {
 
   static showForm(event) {
     event.preventDefault();
-    this.formContainer.style.display = "block";
+    this.formContainer.style.display = "flex";
   }
 
   static hideForm(event) {
