@@ -41,7 +41,7 @@ class FormHandler {
 }
 
 class ProjectHandler {
-  static projectArray = ["General"];
+  static projectArray = ["House", "Sport"];
 
   static createProject = (event) => {
     event.preventDefault();
