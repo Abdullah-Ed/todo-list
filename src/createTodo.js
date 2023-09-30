@@ -60,18 +60,15 @@ class ArraysManager extends TodosArrays {
   }
 
   static updateArrays() {
-    ArraysManager.addToTodayArray();
-    console.log(ArraysManager.todayTodoArray);
-    ArraysManager.addToCurrentWeekArray();
-    console.log(ArraysManager.currentWeekTodoArray);
-    ArraysManager.updateProjectArray();
+    this.addToTodayArray();
+    this.addToCurrentWeekArray();
+    this.updateProjectArray();
     Storage.storeTodos();
   }
 
   static getLilInnerText() {
     if (document.querySelector(".currentProject")) {
       const project = document.querySelector(".currentProject").innerText;
-      console.log(project);
       return project;
     }
   }

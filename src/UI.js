@@ -61,9 +61,7 @@ class TodoManager {
     TodosArrays.allTodosArray.forEach((todo, currentIndex) => {
       if (todo.id == id) {
         indexInAllTodos = currentIndex;
-        console.log("Current Status:", todo.status);
         todo.status = !todo.status; // Toggle the status
-        console.log("New Status:", todo.status);
 
         ArraysManager.updateArrays();
         TabHandler.updateCurrentArray();
@@ -78,7 +76,6 @@ class TodoManager {
     TodosArrays.allTodosArray.forEach((todo, currentIndex) => {
       if (todo.id == id) {
         indexInAllTodos = currentIndex;
-        console.log(currentIndex);
         TodosArrays.allTodosArray.splice(indexInAllTodos, 1);
 
         ArraysManager.updateArrays();

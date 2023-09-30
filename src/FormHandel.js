@@ -11,7 +11,6 @@ class FormHandler {
     const newTodo = this.createTodoFromForm(form);
 
     TodosArrays.addToArray(newTodo);
-    console.log(TodosArrays.allTodosArray);
     ArraysManager.updateArrays();
     StyleControl.changePriorityStyle();
     TabHandler.updateCurrentArray();
@@ -104,7 +103,6 @@ class ProjectHandler {
         const imgIndex = event.target.getAttribute("data-project-index");
         this.projectArray.splice(imgIndex, 1);
         this.renderProjects();
-        console.log(this.projectArray);
       }
     });
     Storage.storeProjects();
