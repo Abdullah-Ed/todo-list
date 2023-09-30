@@ -2,7 +2,26 @@ import { isThisWeek, isToday, parseISO } from "date-fns";
 import { ProjectHandler } from "./FormHandel";
 
 class TodosArrays {
-  static allTodosArray = [];
+  static allTodosArray = [
+    {
+      description: "",
+      dueDate: new Date(),
+      id: "16958486252222220.3315",
+      priority: "Low",
+      project: "Sport",
+      status: true,
+      title: "Run for 30 minutes",
+    },
+    {
+      description: "don't miss any spot ",
+      dueDate: new Date(),
+      id: "1695848625570.3315",
+      priority: "High",
+      project: "House",
+      status: false,
+      title: "Clean the bedroom",
+    },
+  ];
   static todayTodoArray = [];
   static currentWeekTodoArray = [];
 
