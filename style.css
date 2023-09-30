@@ -4,7 +4,7 @@
   --header-bg-color: #6e819b;
   --aside-bg-color: #ddd;
   --project-bg-color: #b9b9b9;
-  --aside-width: 165px;
+  --aside-width: 180px;
   --input-bg-color: #fcf5f5;
   --container-bg-color: #a0afbd;
 }
@@ -75,7 +75,7 @@ img {
 }
 
 li {
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   width: var(--aside-width);
   margin-bottom: 0.4em;
 }
@@ -151,9 +151,6 @@ button:active {
   width: var(--aside-width);
   display: flex;
   justify-content: space-around;
-}
-
-.show-project-form {
 }
 
 .delete-project-icon {
