@@ -9,18 +9,22 @@ class TodoRenderer {
     const titleId = todo.status ? "completed" : "title";
     return `
     <div class="todo-container">
-      <h1 class="title" id="${titleId}" data-status-id="${todo.id}">${
+      <h3 class="title" id="${titleId}" data-status-id="${todo.id}">${
       todo.title
-    }</h1>
-      <p class="details">${todo.description}</p>
-      <p>${format(new Date(todo.dueDate), "dd/MM/yyyy")}</p>
-      <p class="priority-color">${todo.priority}</p>
-      <img class="edit-icon" data-edit-id="${
-        todo.id
-      }" src="./images/edit.svg" alt="Edit icon">
-      <img class="delete-icon" data-delete-id="${
-        todo.id
-      }" src="./images/delete.svg" alt="Delete icon">
+    }</h3>
+      <div>
+        <p class="details">${todo.description}</p>
+        <p>${format(new Date(todo.dueDate), "dd/MM/yyyy")}</p>
+        <p class="priority-color">${todo.priority}</p>
+        <div>
+          <img class="edit-icon" data-edit-id="${
+            todo.id
+          }" src="./images/edit.svg" alt="Edit icon">
+          <img class="delete-icon" data-delete-id="${
+            todo.id
+          }" src="./images/delete.svg" alt="Delete icon">
+        </div>
+      </div>
     </div>
   `;
   }
@@ -120,14 +124,14 @@ class TodoManager {
     
         <label for="priority">Priority</label>
         <select name="priority" class='priority' id="priority" required>
-          <option value="high" ${
-            todo.priority === "high" ? "selected" : ""
+          <option value="High" ${
+            todo.priority === "High" ? "selected" : ""
           }>High</option>
-          <option value="medium" ${
-            todo.priority === "medium" ? "selected" : ""
+          <option value="Medium" ${
+            todo.priority === "Medium" ? "selected" : ""
           }>Medium</option>
-          <option value="low" ${
-            todo.priority === "low" ? "selected" : ""
+          <option value="Low" ${
+            todo.priority === "Low" ? "selected" : ""
           }>Low</option>
         </select>
         <div>
@@ -280,11 +284,11 @@ class StyleControl {
   static changePriorityStyle() {
     const priories = document.querySelectorAll(".priority-color");
     priories.forEach((priority) => {
-      if (priority.textContent == "high") {
+      if (priority.textContent == "High") {
         priority.style.color = "red";
-      } else if (priority.textContent == "medium") {
-        priority.style.color = "yellow";
-      } else if (priority.textContent == "low") {
+      } else if (priority.textContent == "Medium") {
+        priority.style.color = "#8d8d26";
+      } else if (priority.textContent == "Low") {
         priority.style.color = "green";
       }
     });
